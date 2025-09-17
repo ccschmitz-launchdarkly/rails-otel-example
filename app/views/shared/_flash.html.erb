@@ -1,0 +1,11 @@
+<% if flash[:notice] %>
+  <div style="padding: 8px 12px; background: #e6ffed; border: 1px solid #b7eb8f; margin-bottom: 12px;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if flash[:alert] %>
+  <div style="padding: 8px 12px; background: #fff2f0; border: 1px solid #ffa39e; margin-bottom: 12px;">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+

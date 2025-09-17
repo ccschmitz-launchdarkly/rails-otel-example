@@ -1,0 +1,23 @@
+<div class="container" style="max-width: 720px; margin: 2rem auto;">
+  <h1>OpenTelemetry Demo</h1>
+  <p>Use these buttons to generate logs, traces, HTTP spans, and errors.</p>
+
+  <div id="flash-area">
+    <%= render 'shared/flash' %>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+    <%= button_to 'Emit Logs', otel_log_path, method: :post, remote: true, class: 'btn btn-primary' %>
+    <%= button_to 'Create Custom Trace', otel_trace_path, method: :post, remote: true, class: 'btn btn-primary' %>
+    <%= button_to 'Make External HTTP Request', otel_http_path, method: :post, remote: true, class: 'btn btn-primary' %>
+    <%= button_to 'Handled Error (rescued)', otel_handled_error_path, method: :post, remote: true, class: 'btn btn-warning' %>
+    <%= button_to 'Unhandled Error (500)', otel_unhandled_error_path, method: :post, remote: true, class: 'btn btn-danger', data: { confirm: 'This will raise an unhandled error and return 500. Proceed?' } %>
+    <%= button_to 'Enqueue Background Job', otel_background_job_path, method: :post, remote: true, class: 'btn btn-secondary' %>
+  </div>
+
+  <p style="margin-top: 16px; color: #666;">
+    For unhandled error, check your traces and logs for the exception. For the HTTP request, the HTTP client instrumentation should create a span.
+  </p>
+</div>
+
+

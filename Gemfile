@@ -51,14 +51,9 @@ group :test do
 end
 
 group :default do
-  # OpenTelemetry for Ruby 2.7 / Rails 6
-  gem 'opentelemetry-api', '~> 1.0', '< 1.2'
-  gem 'opentelemetry-sdk', '~> 1.0', '< 1.2'
-  gem 'opentelemetry-exporter-otlp', '~> 0.25'
-  gem 'opentelemetry-instrumentation-rails', '~> 0.25'
-  gem 'opentelemetry-instrumentation-active_record', '~> 0.25'
-  gem 'opentelemetry-instrumentation-rack', '~> 0.25'
-  gem 'opentelemetry-instrumentation-net_http', '~> 0.25'
+  gem 'opentelemetry-sdk', '~> 1.2', '>= 1.2.1'
+  gem 'opentelemetry-instrumentation-all', '~> 0.33.0'
+  gem 'opentelemetry-exporter-otlp', '~> 0.24.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

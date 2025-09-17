@@ -1,24 +1,19 @@
-# README
+# OpenTelemetry Example Running Ruby v2.7.7 and Rails v6.0.6.1
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ensure you're on the correct Ruby version:
 
-Things you may want to cover:
+```sh
+rbenv local 2.7.7
+```
 
-* Ruby version
+Install deps:
 
-* System dependencies
+```sh
+bundle install
+```
 
-* Configuration
+Start server w/ ENV vars for configuration:
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```sh
+env OTEL_RESOURCE_ATTRIBUTES="highlight.project_id=YOUR_LD_SDK_KEY" OTEL_EXPORTER_OTLP_ENDPOINT="https://otel.observability.app.launchdarkly.com:4318" OTEL_TRACES_EXPORTER="otlp" rails server
+```
