@@ -8,5 +8,5 @@ OpenTelemetry::SDK.configure do |c|
   c.use_all
 end
 
-# Send logs to LaunchDarkly
-Rails.logger = TraceLogger.new(STDOUT)
+# Also broadcast logs to TraceLogger in addition to existing logger
+Rails.logger.extend(ActiveSupport::Logger.broadcast(TraceLogger.new($stdout)))
