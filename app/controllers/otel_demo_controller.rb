@@ -1,5 +1,8 @@
 require 'net/http'
 require 'uri'
+require 'httparty'
+require 'rest-client'
+require 'typhoeus'
 
 class OtelDemoController < ApplicationController
   def index
@@ -103,6 +106,139 @@ class OtelDemoController < ApplicationController
       end
       format.js do
         flash.now[:notice] = message
+        render :update
+      end
+    end
+  end
+
+  def http_httparty
+    tracer = OpenTelemetry.tracer_provider.tracer('rails-otel-example.otel_demo', '1.0')
+    tracer.in_span('otel_demo.http_httparty') do |_span|
+      HTTParty.get('https://httpbin.org/get')
+    end
+    message = 'HTTParty request made.'
+    respond_to do |format|
+      format.html do
+        flash[:notice] = message
+        redirect_to action: :index
+      end
+      format.js do
+        flash.now[:notice] = message
+        render :update
+      end
+    end
+  rescue => e
+    Rails.logger.error("HTTParty error: #{e.class}: #{e.message}")
+    Rails.logger.error(e.backtrace.join("\n"))
+    message = "HTTParty error: #{e.message}"
+    respond_to do |format|
+      format.html do
+        flash[:alert] = message
+        redirect_to action: :index
+      end
+      format.js do
+        flash.now[:alert] = message
+        render :update
+      end
+    end
+  end
+
+  def http_restclient
+    tracer = OpenTelemetry.tracer_provider.tracer('rails-otel-example.otel_demo', '1.0')
+    tracer.in_span('otel_demo.http_restclient') do |_span|
+      RestClient.get('https://httpbin.org/get')
+    end
+    message = 'RestClient request made.'
+    respond_to do |format|
+      format.html do
+        flash[:notice] = message
+        redirect_to action: :index
+      end
+      format.js do
+        flash.now[:notice] = message
+        render :update
+      end
+    end
+  rescue => e
+    Rails.logger.error("RestClient error: #{e.class}: #{e.message}")
+    Rails.logger.error(e.backtrace.join("\n"))
+    message = "RestClient error: #{e.message}"
+    respond_to do |format|
+      format.html do
+        flash[:alert] = message
+        redirect_to action: :index
+      end
+      format.js do
+        flash.now[:alert] = message
+        render :update
+      end
+    end
+  end
+
+  def http_typhoeus
+    tracer = OpenTelemetry.tracer_provider.tracer('rails-otel-example.otel_demo', '1.0')
+    tracer.in_span('otel_demo.http_typhoeus') do |_span|
+      Typhoeus.get('https://httpbin.org/get')
+    end
+    message = 'Typhoeus request made.'
+    respond_to do |format|
+      format.html do
+        flash[:notice] = message
+        redirect_to action: :index
+      end
+      format.js do
+        flash.now[:notice] = message
+        render :update
+      end
+    end
+  rescue => e
+    Rails.logger.error("Typhoeus error: #{e.class}: #{e.message}")
+    Rails.logger.error(e.backtrace.join("\n"))
+    message = "Typhoeus error: #{e.message}"
+    respond_to do |format|
+      format.html do
+        flash[:alert] = message
+        redirect_to action: :index
+      end
+      format.js do
+        flash.now[:alert] = message
+        render :update
+      end
+    end
+  end
+
+  def http_net_http_detailed
+    tracer = OpenTelemetry.tracer_provider.tracer('rails-otel-example.otel_demo', '1.0')
+    tracer.in_span('otel_demo.http_net_http_detailed') do |_span|
+      uri = URI('https://httpbin.org/get')
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      request = Net::HTTP::Get.new(uri)
+      response = http.request(request)
+      Rails.logger.info("Response code: #{response.code}")
+    end
+    message = 'Detailed Net::HTTP request made.'
+    respond_to do |format|
+      format.html do
+        flash[:notice] = message
+        redirect_to action: :index
+      end
+      format.js do
+        flash.now[:notice] = message
+        render :update
+      end
+    end
+  rescue => e
+    Rails.logger.error("Net::HTTP detailed error: #{e.class}: #{e.message}")
+    Rails.logger.error(e.backtrace.join("\n"))
+    message = "Net::HTTP detailed error: #{e.message}"
+    respond_to do |format|
+      format.html do
+        flash[:alert] = message
+        redirect_to action: :index
+      end
+      format.js do
+        flash.now[:alert] = message
         render :update
       end
     end

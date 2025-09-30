@@ -9,7 +9,11 @@
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
     <%= button_to 'Emit Logs', otel_log_path, method: :post, remote: true, class: 'btn btn-primary' %>
     <%= button_to 'Create Custom Trace', otel_trace_path, method: :post, remote: true, class: 'btn btn-primary' %>
-    <%= button_to 'Make External HTTP Request', otel_http_path, method: :post, remote: true, class: 'btn btn-primary' %>
+    <%= button_to 'Make External HTTP Request (Net::HTTP)', otel_http_path, method: :post, remote: true, class: 'btn btn-primary' %>
+    <%= button_to 'HTTP Request (HTTParty)', otel_http_httparty_path, method: :post, remote: true, class: 'btn btn-info' %>
+    <%= button_to 'HTTP Request (RestClient)', otel_http_restclient_path, method: :post, remote: true, class: 'btn btn-info' %>
+    <%= button_to 'HTTP Request (Typhoeus)', otel_http_typhoeus_path, method: :post, remote: true, class: 'btn btn-info' %>
+    <%= button_to 'HTTP Request (Net::HTTP Detailed)', otel_http_net_http_detailed_path, method: :post, remote: true, class: 'btn btn-info' %>
     <%= button_to 'Handled Error (rescued)', otel_handled_error_path, method: :post, remote: true, class: 'btn btn-warning' %>
     <%= button_to 'Unhandled Error (500)', otel_unhandled_error_path, method: :post, remote: true, class: 'btn btn-danger', data: { confirm: 'This will raise an unhandled error and return 500. Proceed?' } %>
     <%= button_to 'Enqueue Background Job', otel_background_job_path, method: :post, remote: true, class: 'btn btn-secondary' %>
