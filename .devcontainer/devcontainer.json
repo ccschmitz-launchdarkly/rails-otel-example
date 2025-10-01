@@ -1,0 +1,41 @@
+{
+  "name": "rails-otel-example",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/rails-otel-example",
+  "image": "mcr.microsoft.com/devcontainers/ruby:2.7",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers/features/postgresql-client:1": {}
+  },
+  "containerEnv": {
+    "RAILS_ENV": "development",
+    "DATABASE_HOST": "db",
+    "DATABASE_USERNAME": "postgres",
+    "DATABASE_PASSWORD": "postgres",
+    "DATABASE_PORT": "5432"
+  },
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Rails",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postCreateCommand": "bundle config set without 'production' && bundle install && bundle exec rails db:prepare",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rebornix.Ruby",
+        "Shopify.ruby-lsp",
+        "bung87.rails",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}
+
+
+

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
-ruby '2.7.7'
+ruby '2.7.8'
 
 gem 'dotenv-rails', '2.7.2', require: 'dotenv/rails-now' # Keep this gem at the top to avoid load order issues
 gem 'rails', '6.0.6.1'
@@ -138,7 +138,7 @@ end
 group :development do
   gem 'better_errors', '2.9.1'
   gem 'binding_of_caller', '0.8.0'
-  gem 'bootsnap', '1.5.1', require: false
+  gem 'bootsnap', '~> 1.16.0', require: false
   gem 'bullet', '6.1.3'
   gem 'debug', '1.11.0'
   gem 'guard', '2.16.2'

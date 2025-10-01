@@ -1,4 +1,5 @@
 require "logger"
+require "active_support/logger"
 require "opentelemetry-api"
 
 class TraceLogger < ::Logger
@@ -18,7 +19,12 @@ class TraceLogger < ::Logger
       span.add_event("log", attributes: log_attrs(sev, msg, progname))
     end
 
-    super(severity, message, progname, &block) # keep normal logging behavior
+    begin
+      super(severity, message, progname, &block) # keep normal logging behavior
+    rescue Errno::EPIPE
+      # Ignore broken pipe errors - happens when STDOUT is closed/disconnected
+      # The logging will continue to other appenders
+    end
   end
 
   private
