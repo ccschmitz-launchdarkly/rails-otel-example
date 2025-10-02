@@ -5,7 +5,9 @@ require_relative '../../lib/trace_logger'
 
 OpenTelemetry::SDK.configure do |c|
   c.service_name = 'rails-otel-example'
-  c.use_all
+  c.use_all({
+    'OpenTelemetry::Instrumentation::PG' => { enabled: false }
+  })
 end
 
 # Also broadcast logs to TraceLogger in addition to existing logger

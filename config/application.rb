@@ -15,5 +15,8 @@ module RailsOtelExample
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    # Disable migration errors
+    config.active_record.migration_error = false
   end
 end

@@ -1,11 +1,8 @@
 # frozen_string_literal: true
+
 source 'https://rubygems.org'
 ruby '2.7.8'
 
-gem 'dotenv-rails', '2.7.2', require: 'dotenv/rails-now' # Keep this gem at the top to avoid load order issues
-gem 'rails', '6.0.6.1'
-gem 'activemodel-serializers-xml', '1.0.2'
-gem 'devise', '4.8.1'
 gem 'actioncable', '6.0.6.1'
 gem 'actionmailbox', '6.0.6.1'
 gem 'actionmailer', '6.0.6.1'
@@ -15,9 +12,13 @@ gem 'actionview', '6.0.6.1'
 gem 'active_attr', '0.15.4'
 gem 'activejob', '6.0.6.1'
 gem 'activemodel', '>= 3.0.0'
+gem 'activemodel-serializers-xml', '1.0.2'
 gem 'activerecord', '6.0.6.1'
 gem 'activestorage', '6.0.6.1'
 gem 'activesupport'
+gem 'devise', '4.8.1'
+gem 'dotenv-rails', '2.7.2', require: 'dotenv/rails-now' # Keep this gem at the top to avoid load order issues
+gem 'rails', '6.0.6.1'
 # gem 'active_zuora', '2.5.4', git: 'git@github.com:HireologyCorp/active_zuora.git'
 gem 'addressable', '~> 2.8.0' # replacement for the standard URI lib which more closely adheres to current standards
 # gem 'adp-connection', git: 'git@github.com:HireologyCorp/adp-connection-ruby.git', ref: '1ccd79b'
@@ -44,8 +45,8 @@ gem 'flipper-redis', '~> 0.25.3'
 gem 'flipper-ui', '0.25.3'
 gem 'geocoder', '1.6.4'
 gem 'google-api-client', '~> 0.52.0'
-gem 'google-protobuf', '~> 3.25.5'
 gem 'googleauth', '~> 0.11.0'
+gem 'google-protobuf', '~> 3.25.5'
 gem 'griddler', '1.5.2' # Email capture
 gem 'griddler-sendgrid', '~> 0.0.1'
 gem 'hstore_accessor', '1.1.0'
@@ -53,12 +54,12 @@ gem 'httparty', '~> 0.18.1'
 gem 'icalendar'
 gem 'jquery-migrate-rails'
 gem 'jquery-rails'
-gem 'rails-ujs', '~> 5.0'
-gem 'turbolinks', '~> 5'
 gem 'json', '2.5.1'
 gem 'jsonapi-resources', '0.9.0'
 gem 'jwt', '~> 2.7.0'
+gem 'rails-ujs', '~> 5.0'
 gem 'railties', '>= 3.0'
+gem 'turbolinks', '~> 5'
 # TODO: This is a temporary solution while kt-paperclip determines what to do and/or we migrate to ActiveStorage
 # gem 'kt-paperclip', git: 'git@github.com:HireologyCorp/kt-paperclip.git', branch: 'use-marcel'
 gem 'launchdarkly_api', '~> 13.0'
@@ -165,14 +166,13 @@ end
 #   gem 'webmock', '~> 3.5'
 # end
 gem 'amazing_print', '~> 1.4'
-gem 'rails_semantic_logger', '~> 4.10'
-gem 'rack-cors', '~> 2.0'
-gem 'oauth2', '~> 2.0'
 gem 'ar_after_transaction', '~> 0.8.0'
 gem 'foreman', '~> 0.87.2'
+gem 'oauth2', '~> 2.0'
+gem 'rack-cors', '~> 2.0'
+gem 'rails_semantic_logger', '~> 4.10'
 
 # New OpenTelemetry gems
-gem 'opentelemetry-sdk', '~> 1.2', '>= 1.2.1'
-gem 'opentelemetry-instrumentation-all', '~> 0.33.0'
 gem 'opentelemetry-exporter-otlp', '~> 0.24.0'
-
+gem 'opentelemetry-instrumentation-all', '~> 0.33.0'
+gem 'opentelemetry-sdk', '~> 1.2', '>= 1.2.1'
