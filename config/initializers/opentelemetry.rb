@@ -14,6 +14,8 @@ OpenTelemetry::SDK.configure do |c|
   # This enables the Rails app to continue traces started by the client
   # Using our custom propagator that fixes the frozen string issue
   c.propagators = [
+    # Can replace with OpenTelemetry::Trace::Propagation::TraceContext.text_map_propagator
+    # after upgrading to Ruby v3.x
     CustomTraceContextPropagator.new,
     OpenTelemetry::Baggage::Propagation.text_map_propagator
   ]
@@ -28,17 +30,10 @@ Rails.logger.extend(ActiveSupport::Logger.broadcast(TraceLogger.new($stdout)))
 # The issue occurs when string interpolation creates frozen strings, which then
 # fail when mutating methods like upcase! or tr! are called on them.
 class CustomRackEnvGetter
-  # Maps header names to Rack env keys
-  # @param carrier [Hash] The Rack environment hash
-  # @param key [String] The header key (e.g., 'traceparent')
-  # @return [String, nil] The value from the Rack environment
   def get(carrier, key)
     carrier[to_rack_key(key)] || carrier[key]
   end
 
-  # Returns the Rack environment keys for the given header key
-  # @param key [String] The header key
-  # @return [Array<String>] Array of possible Rack env keys
   def keys(carrier, key)
     [to_rack_key(key), key].select { |k| carrier.key?(k) }
   end
@@ -52,7 +47,6 @@ class CustomRackEnvGetter
   # @param key [String] Header key (e.g., 'traceparent')
   # @return [String] Rack env key (e.g., 'HTTP_TRACEPARENT')
   def to_rack_key(key)
-    # The +'' prefix creates a mutable copy of the string to avoid FrozenError
     ret = +"HTTP_#{key}"
     ret.tr!('-', '_')
     ret.upcase!
@@ -60,24 +54,20 @@ class CustomRackEnvGetter
   end
 end
 
-# Custom text map propagator that uses our custom RackEnvGetter
 class CustomTraceContextPropagator
   def initialize
     @propagator = OpenTelemetry::Trace::Propagation::TraceContext::TextMapPropagator.new
     @getter = CustomRackEnvGetter.new
   end
 
-  # Extract trace context from carrier using custom getter
   def extract(carrier, context: OpenTelemetry::Context.current, getter: @getter)
     @propagator.extract(carrier, context: context, getter: getter)
   end
 
-  # Inject trace context into carrier (delegates to standard propagator)
   def inject(carrier, context: OpenTelemetry::Context.current, setter: OpenTelemetry::Context::Propagation.text_map_setter)
     @propagator.inject(carrier, context: context, setter: setter)
   end
 
-  # Returns the fields that this propagator will inject
   def fields
     @propagator.fields
   end
