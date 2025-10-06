@@ -183,6 +183,7 @@ GEM
       activemodel-serializers-xml (>= 1.0)
       activesupport (>= 5.0)
       request_store (>= 1.0)
+    dry-cli (1.2.0)
     dry-configurable (1.0.1)
       dry-core (~> 1.0, < 2)
       zeitwerk (~> 2.6)
@@ -688,6 +689,8 @@ GEM
       rack (>= 1.2.0)
     rack-protection (2.2.3)
       rack
+    rack-proxy (0.7.7)
+      rack
     rack-session (1.0.2)
       rack (< 3)
     rack-test (2.2.0)
@@ -950,6 +953,15 @@ GEM
     uuidtools (3.0.0)
     vault (0.7.3)
     version_gem (1.1.9)
+    vite_rails (3.0.19)
+      railties (>= 5.1, < 9)
+      vite_ruby (~> 3.0, >= 3.2.2)
+    vite_ruby (3.9.2)
+      dry-cli (>= 0.7, < 2)
+      logger (~> 1.6)
+      mutex_m
+      rack-proxy (~> 0.6, >= 0.6.1)
+      zeitwerk (~> 2.2)
     warden (1.2.9)
       rack (>= 2.0.9)
     wasabi (2.5.1)
@@ -1104,6 +1116,7 @@ DEPENDENCIES
   uuid
   uuidtools
   vault (~> 0.7.3)
+  vite_rails (~> 3.0)
   watir (~> 6.8.4)
   wicked_pdf (~> 1.1.0)
   will_paginate (= 3.1.7)

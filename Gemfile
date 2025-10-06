@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.7.8'
+ruby '~> 2.7.0'
 
 gem 'actioncable', '6.0.6.1'
 gem 'actionmailbox', '6.0.6.1'
@@ -171,6 +171,7 @@ gem 'foreman', '~> 0.87.2'
 gem 'oauth2', '~> 2.0'
 gem 'rack-cors', '~> 2.0'
 gem 'rails_semantic_logger', '~> 4.10'
+gem 'vite_rails', '~> 3.0'
 
 # New OpenTelemetry gems
 gem 'opentelemetry-exporter-otlp', '~> 0.24.0'

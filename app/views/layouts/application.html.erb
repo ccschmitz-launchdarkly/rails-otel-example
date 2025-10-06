@@ -5,8 +5,13 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- LaunchDarkly Client-Side ID -->
+    <meta name="launchdarkly-client-id" content="68626cdec671e80927044b8c">
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= vite_client_tag %>
+    <%= vite_typescript_tag 'application' %>
+
   </head>
 
   <body>

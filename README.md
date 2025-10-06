@@ -1,4 +1,4 @@
-# OpenTelemetry Example Running Ruby v2.7.7 and Rails v6.0.6.1
+# OpenTelemetry Example Running Ruby v2.7.8 and Rails v6.0.6.1
 
 Ensure you're on the correct Ruby version:
 
